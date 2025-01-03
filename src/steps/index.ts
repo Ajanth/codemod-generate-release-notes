@@ -1,2 +1,2 @@
-export * from './add-end-of-line.js';
 export * from './create-options.js';
+export * from './generate-release-notes.js';
