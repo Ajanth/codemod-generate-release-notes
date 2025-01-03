@@ -46,8 +46,6 @@ export function generateReleaseNotes(options: Options): void {
     })
     .filter(allow) as VersionNameCategory[];
 
-  console.log('All Version Name Categories:', versionNameCategories);
-
   // Organize Latest Versions by Category
   const categorizedLatestVersions: Record<string, LatestVersionEntry[]> = {};
   versionNameCategories.forEach((versionNameCategory: VersionNameCategory) => {
@@ -136,8 +134,6 @@ function getPackageRoots(projectRoot: string): string[] {
   });
 
   const isMonorepo = packageRoots.length > 1;
-
-  console.log('Package Roots:', packageRoots);
 
   if (isMonorepo) {
     // Remove the workspace root
