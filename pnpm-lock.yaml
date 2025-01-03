@@ -17,6 +17,9 @@ importers:
       '@codemod-utils/files':
         specifier: ^2.0.5
         version: 2.0.5
+      '@codemod-utils/json':
+        specifier: ^1.1.9
+        version: 1.1.10
       yargs:
         specifier: ^17.7.2
         version: 17.7.2
@@ -225,6 +228,10 @@ packages:
 
   '@codemod-utils/files@2.0.5':
     resolution: {integrity: sha512-aGlzX2yMIk4tHKYAqvZmYXcdwrUSTEUOT2RLuVPREi5UorAPDwA2nsXZ5Uv9isqih53/EU4GKlRuK2X5HEfwoA==}
+    engines: {node: 18.* || >= 20}
+
+  '@codemod-utils/json@1.1.10':
+    resolution: {integrity: sha512-kaOSixeKRcI81ptod4b8I/5RfwBDssyl/2d/1pJkzOqhc89y2fTq0RF60RHis6S1qt+8v1+mSI9Jko6Scj7vaw==}
     engines: {node: 18.* || >= 20}
 
   '@codemod-utils/tests@1.1.8':
@@ -1721,6 +1728,10 @@ packages:
     resolution: {integrity: sha512-Ne+eE4r0/iWnpAxD852z3A+N0Bt5RN//NjJwRd2VFHEmrywxf5vsZlh4R6lixl6B+wz/8d+maTSAkN1FIkI3LQ==}
     engines: {node: '>=10'}
 
+  type-fest@4.31.0:
+    resolution: {integrity: sha512-yCxltHW07Nkhv/1F6wWBr8kz+5BGMfP+RbRSYFnegVb0qV/UMT0G0ElBloPVerqn4M2ZV80Ir1FtCcYv1cT6vQ==}
+    engines: {node: '>=16'}
+
   typed-array-buffer@1.0.3:
     resolution: {integrity: sha512-nAYYwfY3qnzX30IkA6AQZjVbtK6duGontcQm1WSG1MD94YLqK0515GNApXkoxKOWMusVssAHWLh9SeaoefYFGw==}
     engines: {node: '>= 0.4'}
@@ -2097,6 +2108,10 @@ snapshots:
   '@codemod-utils/files@2.0.5':
     dependencies:
       glob: 10.4.5
+
+  '@codemod-utils/json@1.1.10':
+    dependencies:
+      type-fest: 4.31.0
 
   '@codemod-utils/tests@1.1.8(@sondr3/minitest@0.1.2)':
     dependencies:
@@ -3771,6 +3786,8 @@ snapshots:
       prelude-ls: 1.2.1
 
   type-fest@0.20.2: {}
+
+  type-fest@4.31.0: {}
 
   typed-array-buffer@1.0.3:
     dependencies:
