@@ -1,4 +1,4 @@
-[![This project uses GitHub Actions for continuous integration.](https://github.com/<your-github-handle>/ember-codemod-generate-release-notes/actions/workflows/ci.yml/badge.svg)](https://github.com/<your-github-handle>/ember-codemod-generate-release-notes/actions/workflows/ci.yml)
+[![This project uses GitHub Actions for continuous integration.](https://github.com/Ajanth/ember-codemod-generate-release-notes/actions/workflows/ci.yml/badge.svg)](https://github.com/Ajanth/ember-codemod-generate-release-notes/actions/workflows/ci.yml)
 
 # ember-codemod-generate-release-notes
 

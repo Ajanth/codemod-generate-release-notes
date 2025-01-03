@@ -14,7 +14,7 @@ Here are some guidelines to help you and everyone else.
 1. Fork and clone this repo.
 
     ```sh
-    git clone git@github.com:<your-github-handle>/ember-codemod-generate-release-notes.git
+    git clone git@github.com:Ajanth/ember-codemod-generate-release-notes.git
     ```
 
 1. Change directory.
@@ -91,7 +91,7 @@ Here are some guidelines to help you and everyone else.
     GITHUB_TOKEN=<YOUR_PERSONAL_ACCESS_TOKEN> pnpm release:changelog
     ```
 
-1. [Create a tag](https://github.com/<your-github-handle>/ember-codemod-generate-release-notes/releases/new) and provide release notes. The tag name should match the package version.
+1. [Create a tag](https://github.com/Ajanth/ember-codemod-generate-release-notes/releases/new) and provide release notes. The tag name should match the package version.
 
 1. Publish the package.
 

@@ -1,6 +1,6 @@
 const { getInfo } = require('@changesets/get-github-info');
 
-const repo = '<your-github-handle>/ember-codemod-generate-release-notes';
+const repo = 'https://github.com/Ajanth/ember-codemod-generate-release-notes';
 
 async function analyze(changeset) {
   const { links: info } = await getInfo({
