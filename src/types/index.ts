@@ -9,7 +9,6 @@ export type CodemodOptions = {
 export type ChangesetEntry = {
   packageName: string;
   prNumbers: string[];
-  version: string;
 };
 
 export type LatestVersionEntry = {

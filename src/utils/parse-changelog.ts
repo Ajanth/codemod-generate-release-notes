@@ -11,7 +11,6 @@ export function parseChangelogFile(content: string): ChangesetEntry[] {
 
   let packageName = '';
   const prNumbers: string[] = [];
-  let matchedVersion = '';
   let inLatestVersionSection = false;
 
   for (const line of lines) {
@@ -28,7 +27,6 @@ export function parseChangelogFile(content: string): ChangesetEntry[] {
       if (inLatestVersionSection) {
         break; // Only parse the first (latest) version section
       }
-      matchedVersion = versionMatch[1]!;
       inLatestVersionSection = true;
       continue;
     }
@@ -43,7 +41,7 @@ export function parseChangelogFile(content: string): ChangesetEntry[] {
   }
 
   if (packageName && prNumbers.length > 0) {
-    entries.push({ packageName, prNumbers, version: matchedVersion });
+    entries.push({ packageName, prNumbers });
   }
 
   return entries;
