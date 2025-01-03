@@ -1,9 +1,15 @@
 type CodemodOptions = {
+  outputPath: string;
   projectRoot: string;
 };
 
-type Options = {
-  projectRoot: string;
+/**
+ * Interface for Changeset entries
+ */
+export type ChangesetEntry = {
+  packageName: string;
+  prNumbers: string[];
+  version: string;
 };
 
-export type { CodemodOptions, Options };
+export type Options = CodemodOptions;
