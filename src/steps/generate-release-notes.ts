@@ -1,31 +1,25 @@
 import { writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 
-import type {
-  ChangesetEntry,
-  LatestVersionEntry,
-  Options,
-} from '../types/index.js';
+import type { Options, PackageNameVersionEntry } from '../types/index.js';
 
 /**
- * Generates RELEASE_NOTES.md based on .changelog and package.json files
+ * Generates RELEASE_NOTES.md based on package.json files
  * @param options - Codemod options
  */
 export function generateReleaseNotes(
   options: Options,
-  updatedPackages: ChangesetEntry[],
-  categorizedLatestVersions: Record<string, LatestVersionEntry[]>,
+  updatedPackages: PackageNameVersionEntry[],
+  categorizedLatestVersions: Record<string, PackageNameVersionEntry[]>,
 ): void {
   const { projectRoot } = options;
 
-  // Step 3: Generate Markdown Content
   let markdownContent = '';
 
   // Section: Updated Packages
   markdownContent += '## Updated packages\n\n';
-  updatedPackages.forEach(({ packageName, prNumbers }) => {
-    const prNumbersFormatted = prNumbers.map((pr) => `#${pr}`).join(', ');
-    markdownContent += `- ${packageName} (${prNumbersFormatted})\n`;
+  updatedPackages.forEach(({ name }) => {
+    markdownContent += `- ${name} \n`;
   });
 
   // Section: Latest Versions
@@ -42,7 +36,7 @@ export function generateReleaseNotes(
     markdownContent += `\n`;
   }
 
-  // Step 4: Write to RELEASE_NOTES.md
+  //Write to RELEASE_NOTES.md
   const releaseNotesPath = join(projectRoot, 'RELEASE_NOTES.md');
   writeFileSync(releaseNotesPath, markdownContent, 'utf8');
 

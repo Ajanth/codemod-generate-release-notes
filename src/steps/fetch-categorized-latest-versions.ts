@@ -4,17 +4,17 @@ import { findFiles, parseFilePath } from '@codemod-utils/files';
 import { readPackageJson } from '@codemod-utils/json';
 
 import {
-  LatestVersionEntry,
   Options,
+  PackageNameVersionEntry,
   VersionNameCategory,
 } from '../types/index.js';
 
 // Step: Parse package.json Files to get Versions, Names grouped by Categories
 export function fetchCategorizedLatestVersions(
   options: Options,
-): Record<string, LatestVersionEntry[]> {
-  const { projectRoot } = options;
-  const packageRoots = getPackageRoots(projectRoot);
+): Record<string, PackageNameVersionEntry[]> {
+  const { packagesPath, projectRoot } = options;
+  const packageRoots = getPackageRoots(packagesPath, projectRoot);
   const versionNameCategories = packageRoots
     .map((packageRoot) => {
       try {
@@ -23,6 +23,7 @@ export function fetchCategorizedLatestVersions(
         return {
           name: packageJson['name'],
           version: packageJson['version'],
+          isPrivate: packageJson['private'] === true,
           category,
         };
       } catch {
@@ -32,15 +33,16 @@ export function fetchCategorizedLatestVersions(
     .filter(allow) as VersionNameCategory[];
 
   // Organize Latest Versions by Category
-  const categorizedLatestVersions: Record<string, LatestVersionEntry[]> = {};
+  const categorizedLatestVersions: Record<string, PackageNameVersionEntry[]> =
+    {};
   versionNameCategories.forEach((versionNameCategory: VersionNameCategory) => {
     if (!categorizedLatestVersions[versionNameCategory.category]) {
       categorizedLatestVersions[versionNameCategory.category] = [];
     }
 
     categorizedLatestVersions[versionNameCategory.category]!.push({
-      version: versionNameCategory.version!,
       name: versionNameCategory.name!,
+      version: versionNameCategory.version!,
     });
   });
 
@@ -48,15 +50,21 @@ export function fetchCategorizedLatestVersions(
 }
 
 function allow(input?: VersionNameCategory): boolean {
-  if (!input || !input.version || !input.name || !input.category) {
+  if (
+    !input ||
+    !input.version ||
+    !input.name ||
+    !input.category ||
+    input.isPrivate
+  ) {
     return false;
   }
 
   return new RegExp(/^\d+\.\d+\.\d+$/).test(input.version);
 }
 
-function getPackageRoots(projectRoot: string): string[] {
-  const packageRoots = findFiles('packages/**/package.json', {
+function getPackageRoots(packagesPath: string, projectRoot: string): string[] {
+  const packageRoots = findFiles(`${packagesPath}/**/package.json`, {
     ignoreList: ['**/{dist,node_modules}/**/*'],
     projectRoot,
   }).map((filePath) => {

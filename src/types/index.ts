@@ -1,23 +1,16 @@
 export type CodemodOptions = {
-  outputPath: string;
+  packagesPath: string;
   projectRoot: string;
 };
 
-/**
- * Interface for Changeset entries
- */
-export type ChangesetEntry = {
-  packageName: string;
-  prNumbers: string[];
-};
-
-export type LatestVersionEntry = {
+export type PackageNameVersionEntry = {
   name: string;
   version: string;
 };
 
 export type VersionNameCategory = {
   category: string;
+  isPrivate: boolean;
   name: string | undefined;
   version: string | undefined;
 };

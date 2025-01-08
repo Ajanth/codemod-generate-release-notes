@@ -18,22 +18,19 @@ const argv = yargs(hideBin(process.argv))
     type: 'string',
     default: process.cwd(),
   })
-  .option('output', {
+  .option('packagesPath', {
     alias: 'o',
-    describe: 'Output path for RELEASE_NOTES.md',
+    describe: 'path where child packages live, relative to the root path',
     type: 'string',
-    default: 'RELEASE_NOTES.md',
+    default: 'packages',
   })
   .help()
   .alias('help', 'h')
   .parseSync();
 
 const codemodOptions: CodemodOptions = {
+  packagesPath: argv['packagesPath'],
   projectRoot: argv['root'],
-  outputPath: argv['output'],
 };
-
-console.log('Project Root:', codemodOptions.projectRoot);
-console.log('Output Path:', codemodOptions.outputPath);
 
 runCodemod(codemodOptions);
