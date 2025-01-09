@@ -1,12 +1,12 @@
 {
   "name": "codemod-generate-release-notes",
-  "version": "0.0.0",
-  "private": true,
-  "description": "Small description for codemod-generate-release-notes goes here",
+  "version": "1.0.0",
+  "description": "Generate release notes for a repository",
   "keywords": [
     "codemod",
-    "ember-codemod",
-    "emberjs"
+    "release notes",
+    "workspace",
+    "generate release notes"
   ],
   "repository": "",
   "license": "MIT",
