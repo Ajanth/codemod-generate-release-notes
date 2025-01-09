@@ -2,42 +2,50 @@
 
 # codemod-generate-release-notes
 
-_Codemod to [PROVIDE A SHORT DESCRIPTION.]_
+*A codemod to generate a consolidated RELEASE_NOTES.md file by analyzing updated packages and their versions in a monorepo.*
 
+## Why use it?
+
+When you have a monorepo with multiple packages updated in every release, it can be difficult to create release notes manually by going over the package.json/changelog files.
+
+This codemod scans for updated `package.json` files, categorizes packages by their folder structure, and generates a `RELEASE_NOTES.md` file with updated packages and their latest versions.
 
 ## Usage
+At the workspace root, install codemod-generate-release-notes as a development dependency.
 
-### Arguments
+Then, run the codemod after you create a tag commit on the main branch but before you release the tag in github.
 
-[PROVIDE REQUIRED AND OPTIONAL ARGUMENTS.]
+### Required Arguments
 
-<details>
+- `-root <path>`:
+    
+    Specifies the root directory of the project where the codemod should run.
+    
+- `-packagesPath <path>`:
+    
+    Specifies the relative path to the packages directory within the project. This allows the codemod to locate package JSON files correctly in various repository structures and categorize them
+    
 
-<summary>Optional: Specify the project root</summary>
-
-Pass `--root` to run the codemod somewhere else (i.e. not in the current directory).
-
-```sh
-npx codemod-generate-release-notes --root <path/to/your/project>
 ```
+npx codemod-generate-release-notes --root <path/to/your/project> --packagesPath <relative/path/to/packages-folder>
 
-</details>
-
+```
 
 ### Limitations
 
-The codemod is designed to cover typical cases. It is not designed to cover one-off cases.
+The codemod is designed to cover typical cases in monorepo setups using conventional package structures. It might not handle very custom or unconventional setups without adjustments.
 
-To better meet your needs, consider cloning the repo and running the codemod locally.
+To better meet your needs, consider cloning the repo and running the codemod locally for customization:
 
-```sh
+```
 cd <path/to/cloned/repo>
 
-# Compile TypeScript
-pnpm build
+# Install Dependencies
+pnpm install
 
 # Run codemod
-./dist/bin/codemod-generate-release-notes.js --root <path/to/your/project>
+npx codemod-generate-release-notes.js --root <path/to/your/project> --packagesPath <relative/path/to/packages>
+
 ```
 
 
