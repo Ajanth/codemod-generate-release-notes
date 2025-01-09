@@ -8,10 +8,12 @@ import { Options, PackageNameVersionEntry } from '../types/index.js';
 // Step: Fetch Updated Packages from the Latest Commit's package.json Files
 export function fetchUpdatedPackages(
   options: Options,
+  customPackageJsonFilesSinceLastTag: (projectRoot: string) => string[],
 ): PackageNameVersionEntry[] {
   const { projectRoot } = options;
 
-  const changedPackageJsonFiles = packageJsonFilesSinceLastTag(projectRoot);
+  const changedPackageJsonFiles =
+    customPackageJsonFilesSinceLastTag(projectRoot);
 
   const updatedPackages: PackageNameVersionEntry[] = [];
 
@@ -30,7 +32,7 @@ export function fetchUpdatedPackages(
   return updatedPackages;
 }
 
-function packageJsonFilesSinceLastTag(projectRoot: string): string[] {
+export function packageJsonFilesSinceLastTag(projectRoot: string): string[] {
   const lastTag = execSync('git describe --tags --abbrev=0', {
     cwd: projectRoot,
   })
