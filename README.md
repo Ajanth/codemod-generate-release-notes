@@ -1,6 +1,6 @@
-[![This project uses GitHub Actions for continuous integration.](https://github.com/Ajanth/ember-codemod-generate-release-notes/actions/workflows/ci.yml/badge.svg)](https://github.com/Ajanth/ember-codemod-generate-release-notes/actions/workflows/ci.yml)
+[![This project uses GitHub Actions for continuous integration.](https://github.com/Ajanth/codemod-generate-release-notes/actions/workflows/ci.yml/badge.svg)](https://github.com/Ajanth/codemod-generate-release-notes/actions/workflows/ci.yml)
 
-# ember-codemod-generate-release-notes
+# codemod-generate-release-notes
 
 _Codemod to [PROVIDE A SHORT DESCRIPTION.]_
 
@@ -18,7 +18,7 @@ _Codemod to [PROVIDE A SHORT DESCRIPTION.]_
 Pass `--root` to run the codemod somewhere else (i.e. not in the current directory).
 
 ```sh
-npx ember-codemod-generate-release-notes --root <path/to/your/project>
+npx codemod-generate-release-notes --root <path/to/your/project>
 ```
 
 </details>
@@ -37,7 +37,7 @@ cd <path/to/cloned/repo>
 pnpm build
 
 # Run codemod
-./dist/bin/ember-codemod-generate-release-notes.js --root <path/to/your/project>
+./dist/bin/codemod-generate-release-notes.js --root <path/to/your/project>
 ```
 
 

@@ -1,6 +1,6 @@
-# Contributing to ember-codemod-generate-release-notes
+# Contributing to codemod-generate-release-notes
 
-Open source projects like `ember-codemod-generate-release-notes` live on your words of encouragement and contribution. Please give feedback, report issues, or submit pull requests!
+Open source projects like `codemod-generate-release-notes` live on your words of encouragement and contribution. Please give feedback, report issues, or submit pull requests!
 
 Here are some guidelines to help you and everyone else.
 
@@ -14,13 +14,13 @@ Here are some guidelines to help you and everyone else.
 1. Fork and clone this repo.
 
     ```sh
-    git clone git@github.com:Ajanth/ember-codemod-generate-release-notes.git
+    git clone git@github.com:Ajanth/codemod-generate-release-notes.git
     ```
 
 1. Change directory.
 
     ```sh
-    cd ember-codemod-generate-release-notes
+    cd codemod-generate-release-notes
     ```
 
 1. Use [`pnpm`](https://pnpm.io/installation) to install dependencies.
@@ -91,7 +91,7 @@ Here are some guidelines to help you and everyone else.
     GITHUB_TOKEN=<YOUR_PERSONAL_ACCESS_TOKEN> pnpm release:changelog
     ```
 
-1. [Create a tag](https://github.com/Ajanth/ember-codemod-generate-release-notes/releases/new) and provide release notes. The tag name should match the package version.
+1. [Create a tag](https://github.com/Ajanth/codemod-generate-release-notes/releases/new) and provide release notes. The tag name should match the package version.
 
 1. Publish the package.
 

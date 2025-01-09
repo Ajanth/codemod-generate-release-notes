@@ -19,5 +19,5 @@ pnpm build
 rm -r "tests/fixtures/sample-project/output"
 cp -r "tests/fixtures/sample-project/input" "tests/fixtures/sample-project/output"
 
-./dist/bin/ember-codemod-generate-release-notes.js \
+./dist/bin/codemod-generate-release-notes.js \
   --root "tests/fixtures/sample-project/output"

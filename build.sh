@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-COMMAND="ember-codemod-generate-release-notes"
+COMMAND="codemod-generate-release-notes"
 ENVIRONMENT=$1
 
 if [ $ENVIRONMENT = "--production" ]

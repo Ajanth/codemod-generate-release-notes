@@ -1,8 +1,8 @@
 {
-  "name": "ember-codemod-generate-release-notes",
+  "name": "codemod-generate-release-notes",
   "version": "0.0.0",
   "private": true,
-  "description": "Small description for ember-codemod-generate-release-notes goes here",
+  "description": "Small description for codemod-generate-release-notes goes here",
   "keywords": [
     "codemod",
     "ember-codemod",
@@ -13,7 +13,7 @@
   "author": "",
   "type": "module",
   "main": "dist/src/index.js",
-  "bin": "dist/bin/ember-codemod-generate-release-notes.js",
+  "bin": "dist/bin/codemod-generate-release-notes.js",
   "directories": {
     "test": "tests"
   },
