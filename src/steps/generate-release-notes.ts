@@ -23,17 +23,17 @@ export function generateReleaseNotes(
   });
 
   // Section: Latest Versions
-  markdownContent += '\n## Latest versions\n\n';
+  markdownContent += '\n\n## Latest versions\n';
   for (const [category, packages] of Object.entries(
     categorizedLatestVersions,
   )) {
+    markdownContent += '\n';
     markdownContent += `### ${category}\n\n`;
     markdownContent += `| Name | Version |\n`;
     markdownContent += `|--|:--:|\n`;
     packages.forEach(({ name, version }) => {
       markdownContent += `| ${name} | ${version} |\n`;
     });
-    markdownContent += `\n`;
   }
 
   //Write to RELEASE_NOTES.md

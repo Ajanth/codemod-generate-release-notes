@@ -32,10 +32,13 @@ test('steps | generate-release-notes | should generate release notes for updated
   const releaseNotesPath = join(options.projectRoot, 'RELEASE_NOTES.md');
   const generatedContent = readFileSync(releaseNotesPath, 'utf8');
 
+  console.log(`generatedContent: ${generatedContent}`);
+
   const expectedContent = `## Updated packages
 
 - package-a 
 - package-c 
+
 
 ## Latest versions
 
@@ -51,7 +54,6 @@ test('steps | generate-release-notes | should generate release notes for updated
 | Name | Version |
 |--|:--:|
 | package-c | 2.3.4 |
-
 `;
 
   assert.strictEqual(
@@ -73,13 +75,11 @@ test('steps | generate-release-notes | should handle empty inputs gracefully', f
   const releaseNotesPath = join(options.projectRoot, 'RELEASE_NOTES.md');
   const generatedContent = readFileSync(releaseNotesPath, 'utf8');
 
-  console.log(`generatedContent: ${generatedContent}`);
-
   const expectedContent = `## Updated packages
 
 
-## Latest versions
 
+## Latest versions
 `;
 
   assert.strictEqual(
