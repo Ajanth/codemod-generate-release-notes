@@ -3,7 +3,7 @@ import { join } from 'node:path';
 
 import { assert, loadFixture, test } from '@codemod-utils/tests';
 
-import { generateReleaseNotes } from '../../../src/steps/generate-release-notes.js';
+import { createReleaseNotes } from '../../../src/steps/index.js';
 import { PackageNameVersionEntry } from '../../../src/types/index.js';
 import { options } from '../../helpers/shared-test-setups/monorepo-type-1.js';
 
@@ -19,7 +19,7 @@ test('steps | generate-release-notes | should generate release notes for updated
     { name: 'package-c', version: '2.3.4' },
   ];
 
-  const categorizedLatestVersions: Record<string, PackageNameVersionEntry[]> = {
+  const latestVersions: Record<string, PackageNameVersionEntry[]> = {
     'category-1': [
       { name: 'package-a', version: '1.0.0' },
       { name: 'package-b', version: '1.2.0' },
@@ -27,36 +27,35 @@ test('steps | generate-release-notes | should generate release notes for updated
     'category-2': [{ name: 'package-c', version: '2.3.4' }],
   };
 
-  generateReleaseNotes(options, updatedPackages, categorizedLatestVersions);
+  createReleaseNotes(updatedPackages, latestVersions, options);
 
   const releaseNotesPath = join(options.projectRoot, 'RELEASE_NOTES.md');
-  const generatedContent = readFileSync(releaseNotesPath, 'utf8');
+  const generatedContent = readFileSync(releaseNotesPath, 'utf8').split('\n');
 
-  console.log(`generatedContent: ${generatedContent}`);
+  const expectedContent = [
+    '## Updated packages',
+    '',
+    '- package-a',
+    '- package-c',
+    '',
+    '',
+    '## Latest versions',
+    '',
+    '### category-1',
+    '',
+    '| Name | Version |',
+    '|--|:--:|',
+    '| package-a | 1.0.0 |',
+    '| package-b | 1.2.0 |',
+    '',
+    '### category-2',
+    '',
+    '| Name | Version |',
+    '|--|:--:|',
+    '| package-c | 2.3.4 |',
+  ];
 
-  const expectedContent = `## Updated packages
-
-- package-a 
-- package-c 
-
-
-## Latest versions
-
-### category-1
-
-| Name | Version |
-|--|:--:|
-| package-a | 1.0.0 |
-| package-b | 1.2.0 |
-
-### category-2
-
-| Name | Version |
-|--|:--:|
-| package-c | 2.3.4 |
-`;
-
-  assert.strictEqual(
+  assert.deepStrictEqual(
     generatedContent,
     expectedContent,
     'The generated RELEASE_NOTES.md content should match the expected output',
@@ -67,20 +66,21 @@ test('steps | generate-release-notes | should handle empty inputs gracefully', f
   loadFixture(inputProject, options);
 
   const updatedPackages: PackageNameVersionEntry[] = [];
-  const categorizedLatestVersions: Record<string, PackageNameVersionEntry[]> =
-    {};
+  const latestVersions: Record<string, PackageNameVersionEntry[]> = {};
 
-  generateReleaseNotes(options, updatedPackages, categorizedLatestVersions);
+  createReleaseNotes(updatedPackages, latestVersions, options);
 
   const releaseNotesPath = join(options.projectRoot, 'RELEASE_NOTES.md');
   const generatedContent = readFileSync(releaseNotesPath, 'utf8');
 
-  const expectedContent = `## Updated packages
-
-
-
-## Latest versions
-`;
+  const expectedContent = [
+    '## Updated packages',
+    '',
+    'None',
+    '',
+    '',
+    '## Latest versions',
+  ].join('\n');
 
   assert.strictEqual(
     generatedContent,
