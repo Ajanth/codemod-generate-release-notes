@@ -8,9 +8,9 @@
     "workspace",
     "generate release notes"
   ],
-  "repository": "",
+  "repository": "https://github.com/Ajanth/codemod-generate-release-notes",
   "license": "MIT",
-  "author": "",
+  "author": "Ajanth",
   "type": "module",
   "main": "dist/src/index.js",
   "bin": "dist/bin/codemod-generate-release-notes.js",
