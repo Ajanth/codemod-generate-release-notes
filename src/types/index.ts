@@ -10,7 +10,6 @@ export type PackageNameVersionEntry = {
 
 export type VersionNameCategory = {
   category: string;
-  isPrivate: boolean;
   name: string | undefined;
   version: string | undefined;
 };
