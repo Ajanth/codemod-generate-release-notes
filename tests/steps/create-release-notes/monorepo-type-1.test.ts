@@ -27,13 +27,21 @@ test('steps | generate-release-notes | should generate release notes for updated
     'category-2': [{ name: 'package-c', version: '2.3.4' }],
   };
 
-  createReleaseNotes(updatedPackages, latestVersions, options);
+  const updateScript = 'pnpm update -r package-a@1.0.0 package-c@2.3.4';
+
+  createReleaseNotes(updatedPackages, updateScript, latestVersions, options);
 
   const releaseNotesPath = join(options.projectRoot, 'RELEASE_NOTES.md');
   const generatedContent = readFileSync(releaseNotesPath, 'utf8').split('\n');
 
   const expectedContent = [
     '## Updated packages',
+    '',
+    'How to update:',
+    '',
+    '```sh',
+    'pnpm update -r package-a@1.0.0 package-c@2.3.4',
+    '```',
     '',
     '- package-a',
     '- package-c',
@@ -67,8 +75,9 @@ test('steps | generate-release-notes | should handle empty inputs gracefully', f
 
   const updatedPackages: PackageNameVersionEntry[] = [];
   const latestVersions: Record<string, PackageNameVersionEntry[]> = {};
+  const updateScript = '';
 
-  createReleaseNotes(updatedPackages, latestVersions, options);
+  createReleaseNotes(updatedPackages, updateScript, latestVersions, options);
 
   const releaseNotesPath = join(options.projectRoot, 'RELEASE_NOTES.md');
   const generatedContent = readFileSync(releaseNotesPath, 'utf8');
