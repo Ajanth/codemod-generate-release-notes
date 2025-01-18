@@ -1,4 +1,3 @@
-import { getUpdateScript } from './steps/get-update-script.js';
 import {
   createOptions,
   createReleaseNotes,
@@ -11,8 +10,7 @@ export function runCodemod(codemodOptions: CodemodOptions): void {
   const options = createOptions(codemodOptions);
 
   const updatedPackages = getUpdatedPackages(options);
-  const updateScript = getUpdateScript(updatedPackages);
   const latestVersions = getLatestVersions(options);
 
-  createReleaseNotes(updatedPackages, updateScript, latestVersions, options);
+  createReleaseNotes(updatedPackages, latestVersions, options);
 }
