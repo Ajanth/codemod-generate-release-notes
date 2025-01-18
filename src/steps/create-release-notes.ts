@@ -5,6 +5,7 @@ import type { Options, PackageNameVersionEntry } from '../types/index.js';
 
 export function createReleaseNotes(
   updatedPackages: PackageNameVersionEntry[],
+  updateScript: string,
   latestVersions: Record<string, PackageNameVersionEntry[]>,
   options: Options,
 ): void {
@@ -18,6 +19,11 @@ export function createReleaseNotes(
   if (updatedPackages.length === 0) {
     fileContent += 'None\n';
   } else {
+    fileContent += 'How to update:\n\n';
+    fileContent += '```sh\n';
+    fileContent += updateScript;
+    fileContent += '\n```\n\n';
+
     updatedPackages.forEach(({ name }) => {
       fileContent += `- ${name}\n`;
     });
