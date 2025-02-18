@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.2
+
+- [#8](https://github.com/Ajanth/codemod-generate-release-notes/pull/8) Updated dependencies
+
 ## 1.0.1
 
 ### Minor Changes
