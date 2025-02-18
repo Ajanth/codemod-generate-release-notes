@@ -3,7 +3,7 @@ import { join, relative, sep } from 'node:path';
 import { findFiles } from '@codemod-utils/files';
 import { readPackageJson } from '@codemod-utils/json';
 
-import {
+import type {
   Options,
   PackageNameVersionEntry,
   VersionNameCategory,

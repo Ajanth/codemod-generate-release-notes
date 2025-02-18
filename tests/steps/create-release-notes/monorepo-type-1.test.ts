@@ -4,7 +4,7 @@ import { join } from 'node:path';
 import { assert, loadFixture, test } from '@codemod-utils/tests';
 
 import { createReleaseNotes } from '../../../src/steps/index.js';
-import { PackageNameVersionEntry } from '../../../src/types/index.js';
+import type { PackageNameVersionEntry } from '../../../src/types/index.js';
 import { options } from '../../helpers/shared-test-setups/monorepo-type-1.js';
 
 const inputProject = {

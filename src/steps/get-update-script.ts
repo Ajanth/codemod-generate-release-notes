@@ -1,4 +1,4 @@
-import { PackageNameVersionEntry } from '../types/index.js';
+import type { PackageNameVersionEntry } from '../types/index.js';
 
 export function getUpdateScript(
   updatedPackages: PackageNameVersionEntry[],
