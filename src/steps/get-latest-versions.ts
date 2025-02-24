@@ -14,7 +14,11 @@ export function getLatestVersions(
 ): Record<string, PackageNameVersionEntry[]> {
   const { packagesPath, projectRoot } = options;
 
-  const packageRoots = getPackageRoots(options);
+  const absolutePathToPackages = join(projectRoot, packagesPath);
+
+  const packageRoots = getPackageRoots(options).filter((packageRoot) => {
+    return packageRoot.startsWith(absolutePathToPackages);
+  });
 
   const packageData = packageRoots.reduce<VersionNameCategory[]>(
     (accumulator, packageRoot) => {
@@ -24,8 +28,8 @@ export function getLatestVersions(
         return accumulator;
       }
 
-      const filePath = relative(join(projectRoot, packagesPath), packageRoot);
-      const category = getCategory(filePath);
+      const relativePath = relative(absolutePathToPackages, packageRoot);
+      const category = getCategory(relativePath);
 
       accumulator.push({
         category,
@@ -59,8 +63,8 @@ export function getLatestVersions(
   return latestVersions;
 }
 
-function getCategory(filePath: string): string {
-  const segments = filePath.split(sep);
+function getCategory(relativePath: string): string {
+  const folders = relativePath.split(sep);
 
-  return segments[0] ?? 'Uncategorized';
+  return folders[0] ?? 'Uncategorized';
 }

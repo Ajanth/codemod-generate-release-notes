@@ -11,24 +11,24 @@ When you have a monorepo with multiple packages updated in every release, it can
 This codemod scans for updated `package.json` files, categorizes packages by their folder structure, and generates a `RELEASE_NOTES.md` file with updated packages and their latest versions.
 
 ## Usage
-At the workspace root, install codemod-generate-release-notes as a development dependency.
+
+At the workspace root, install `codemod-generate-release-notes` as a development dependency.
 
 Then, run the codemod after you create a tag commit on the main branch but before you release the tag in github.
 
-### Required Arguments
+### Optional Arguments
 
-- `-root <path>`:
+- `--root <path>`:
     
     Specifies the root directory of the project where the codemod should run.
     
-- `-packagesPath <path>`:
+- `--packagesPath <path>`:
     
     Specifies the relative path to the packages directory within the project. This allows the codemod to locate package JSON files correctly in various repository structures and categorize them
     
 
-```
+```sh
 npx codemod-generate-release-notes --root <path/to/your/project> --packagesPath <relative/path/to/packages-folder>
-
 ```
 
 ### Limitations
@@ -37,15 +37,14 @@ The codemod is designed to cover typical cases in monorepo setups using conventi
 
 To better meet your needs, consider cloning the repo and running the codemod locally for customization:
 
-```
+```sh
 cd <path/to/cloned/repo>
 
-# Install Dependencies
-pnpm install
+# Compile TypeScript
+pnpm build
 
 # Run codemod
-npx codemod-generate-release-notes.js --root <path/to/your/project> --packagesPath <relative/path/to/packages>
-
+./dist/bin/codemod-generate-release-notes.js --root <path/to/your/project>
 ```
 
 

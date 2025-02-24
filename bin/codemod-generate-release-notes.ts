@@ -22,7 +22,7 @@ const argv = yargs(hideBin(process.argv))
     alias: 'o',
     describe: 'path where child packages live, relative to the root path',
     type: 'string',
-    default: 'packages',
+    default: '',
   })
   .help()
   .alias('help', 'h')
