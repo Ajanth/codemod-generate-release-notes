@@ -1,6 +1,6 @@
 import { join, relative, sep } from 'node:path';
 
-import { findFiles } from '@codemod-utils/files';
+import { getPackageRoots } from '@codemod-utils/files';
 import { readPackageJson } from '@codemod-utils/json';
 
 import type {
@@ -38,7 +38,7 @@ export function getLatestVersions(
     [],
   );
 
-  // Group packages by path
+  // Group packages by category
   const latestVersions: Record<string, PackageNameVersionEntry[]> = {};
 
   packageData.forEach((versionNameCategory: VersionNameCategory) => {
@@ -57,21 +57,6 @@ export function getLatestVersions(
   });
 
   return latestVersions;
-}
-
-function getPackageRoots(options: Options): string[] {
-  const { packagesPath, projectRoot } = options;
-
-  const packageJsonPaths = findFiles(`${packagesPath}/**/package.json`, {
-    ignoreList: ['**/{dist,node_modules}/**/*'],
-    projectRoot,
-  });
-
-  const packageRoots = packageJsonPaths.map((filePath) => {
-    return join(projectRoot, filePath.replace(/package\.json$/, ''));
-  });
-
-  return packageRoots;
 }
 
 function getCategory(filePath: string): string {
