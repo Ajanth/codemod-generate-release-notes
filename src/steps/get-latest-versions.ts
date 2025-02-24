@@ -1,6 +1,6 @@
 import { join, relative, sep } from 'node:path';
 
-import { findFiles } from '@codemod-utils/files';
+import { getPackageRoots } from '@codemod-utils/files';
 import { readPackageJson } from '@codemod-utils/json';
 
 import type {
@@ -14,7 +14,11 @@ export function getLatestVersions(
 ): Record<string, PackageNameVersionEntry[]> {
   const { packagesPath, projectRoot } = options;
 
-  const packageRoots = getPackageRoots(options);
+  const absolutePathToPackages = join(projectRoot, packagesPath);
+
+  const packageRoots = getPackageRoots(options).filter((packageRoot) => {
+    return packageRoot.startsWith(absolutePathToPackages);
+  });
 
   const packageData = packageRoots.reduce<VersionNameCategory[]>(
     (accumulator, packageRoot) => {
@@ -24,8 +28,8 @@ export function getLatestVersions(
         return accumulator;
       }
 
-      const filePath = relative(join(projectRoot, packagesPath), packageRoot);
-      const category = getCategory(filePath);
+      const relativePath = relative(absolutePathToPackages, packageRoot);
+      const category = getCategory(relativePath);
 
       accumulator.push({
         category,
@@ -38,7 +42,7 @@ export function getLatestVersions(
     [],
   );
 
-  // Group packages by path
+  // Group packages by category
   const latestVersions: Record<string, PackageNameVersionEntry[]> = {};
 
   packageData.forEach((versionNameCategory: VersionNameCategory) => {
@@ -59,23 +63,8 @@ export function getLatestVersions(
   return latestVersions;
 }
 
-function getPackageRoots(options: Options): string[] {
-  const { packagesPath, projectRoot } = options;
+function getCategory(relativePath: string): string {
+  const folders = relativePath.split(sep);
 
-  const packageJsonPaths = findFiles(`${packagesPath}/**/package.json`, {
-    ignoreList: ['**/{dist,node_modules}/**/*'],
-    projectRoot,
-  });
-
-  const packageRoots = packageJsonPaths.map((filePath) => {
-    return join(projectRoot, filePath.replace(/package\.json$/, ''));
-  });
-
-  return packageRoots;
-}
-
-function getCategory(filePath: string): string {
-  const segments = filePath.split(sep);
-
-  return segments[0] ?? 'Uncategorized';
+  return folders[0] ?? 'Uncategorized';
 }
